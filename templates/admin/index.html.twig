@@ -11,25 +11,11 @@
             <div class="card-body">
                 <h5 class="card-title">{{ user.username }}</h5>
                 <p class="card-text">{{ user.email }}</p>
-                <a href="#" class="btn btn-danger">Supprimeer</a>
+                <a href="{{ path('adminShow', {id : user.id }) }}" class="btn btn-success">Afficher</a>
+                <a href="#" class="btn btn-danger">Supprimer</a>
             </div>
         </div>
-
     {% endfor %}
 </div>
-
-    <h1>TODO</h1>
-    <div class="row">
-        {% for todo in todos %}
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">{{ todo.description }}</h5>
-                    <a href="#" class="btn btn-danger">Supprimeer</a>
-                </div>
-            </div>
-
-        {% endfor %}
-    </div>
-
 
 {% endblock %}
