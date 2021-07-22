@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\TodoRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,16 +28,17 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/show/{}", name="adminShow")
+     * @Route("/admin/show/{id}", name="adminShow")
      */
-    public function show(UserRepository $userRepo, TodoRepository $todoRepo, $id = null): Response
+    public function show(User $user, TodoRepository $todoRepo): Response
     {
 
+        $todos = $user->getTodos();
 
+        $todos = $todoRepo->findByUserSortedByMostRecent($user);
 
-
-        return $this->render('admin/index.html.twig', [
-            'users' => $users,
+        return $this->render('admin/show.html.twig', [
+            'user' => $user,
             'todos' => $todos
         ]);
     }
