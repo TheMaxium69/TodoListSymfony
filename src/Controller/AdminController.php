@@ -58,12 +58,11 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/del/todo/{id}", name="adminDelTodo")
      */
-    public function delTodo(Todo $todo): Response
+    public function delTodo(Todo $todo, EntityManagerInterface $manager): Response
     {
-        dd($todo);
+        $manager->remove($todo);
+        $manager->flush();
 
-        return $this->render('admin/show.html.twig', [
-            'user' => $user
-        ]);
+        return $this->redirectToRoute('admin');
     }
 }
