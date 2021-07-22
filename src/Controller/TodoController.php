@@ -30,7 +30,6 @@ class TodoController extends AbstractController
         if($sort === "createdAt" && $order === "ASC"){
             $todos =$todoRepo->findByUserSortedByLessRecent($user);
         }
-
         if($sort === "dueDate" && $order === "DESC"){
             $todos = $todoRepo->findByUserDueDateByMostRecent($user);
         }

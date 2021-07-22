@@ -25,4 +25,19 @@ class AdminController extends AbstractController
             'todos' => $todos
         ]);
     }
+
+    /**
+     * @Route("/admin/show/{}", name="adminShow")
+     */
+    public function show(UserRepository $userRepo, TodoRepository $todoRepo, $id = null): Response
+    {
+
+
+
+
+        return $this->render('admin/index.html.twig', [
+            'users' => $users,
+            'todos' => $todos
+        ]);
+    }
 }
