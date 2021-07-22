@@ -20,7 +20,7 @@
     <h1 id="traduit">{{ 'traduit' | trans }}</h1>
 
     <a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({ _locale: 'fr' }))}}"><span class="badge rounded-pill bg-info me-3">Fr</span></a>
-    <a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({ _locale: 'en' }))}}"><span class="badge rounded-pill bg-warning me-3">En</span></a>
+    <a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({ _locale: 'en' }))}}"><span class="badge rounded-pill bg-info me-3">En</span></a>
 
 
     {% block body %}{% endblock %}
