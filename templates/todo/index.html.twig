@@ -11,7 +11,7 @@
                 <a href="{{ path("todo/",{sort:'dueDate',order:'DESC'}) }}" class="btn btn-dark"><small>{{ 'moinsurgent' | capitalize }}</small></a>
 
     <div class="count">
-        {{ pagination.getTotalItemCount }}
+       <small> Nombre de todos afficher : {{ todos.getTotalItemCount }}</small>
     </div>
 
         {% for todo in todos %}
@@ -37,6 +37,6 @@
         {% endfor %}
 
     <div class="navigation">
-        {{ knp_pagination_render(pagination) }}
+        {{ knp_pagination_render(todos, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
     </div>
 {% endblock %}

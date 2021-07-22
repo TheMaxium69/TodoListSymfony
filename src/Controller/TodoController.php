@@ -40,16 +40,15 @@ class TodoController extends AbstractController
             $todos = $todoRepo->findByUserSortedByMostRecent($user);
         }
 
-        $pagination = $paginator->paginate(
+        $todos = $paginator->paginate(
             $todos, /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
+            8 /*limit per page*/
         );
 
 
         return $this->render('todo/index.html.twig', [
             'todos' => $todos,
-            'pagination' => $pagination
         ]);
     }
 }
