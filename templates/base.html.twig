@@ -31,9 +31,18 @@
                     </li>
                     {% if app.user %}
                         <a href="{{ path("logout") }}" class="nav-link">Deconnexion</a>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path("admin") }}">Panel
+                                {% if app.user.roles[0] == "ROLE_ADMIN" %}
+                                    <span class="badge bg-success">{{ 'autoriser' | trans | upper}}</span>
+                                {% else %}
+                                    <span class="badge bg-danger">{{ 'non autoriser' | trans | upper}}</span>
+                                {% endif %}</a>
+                        </li>
                     {% else %}
-                        <a href="{{ path("login") }}" class="nav-link">connexion</a>
-                        <a href="{{ path("register") }}" class="nav-link">inscription</a>
+                        <a href="{{ path("login") }}" class="nav-link">{{ 'connexion' | capitalize}}</a>
+                        <a href="{{ path("register") }}" class="nav-link">{{ 'inscription' | capitalize}}</a>
                     {% endif %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,9 +52,6 @@
                             <li><a class="dropdown-item" href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({ _locale: 'fr' }))}}">Français</a></li>
                             <li><a class="dropdown-item" href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({ _locale: 'en' }))}}">English</a></li>
                         </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path("admin") }}">Panel</a>
                     </li>
                 </ul>
             </div>

@@ -9,6 +9,16 @@
               <source>français</source>
               <target>english🇺🇸</target>
             </trans-unit>
+
+      <trans-unit id="autoriser" resname="autoriser">
+               <source>autoriser</source>
+               <target>Access Allow</target>
+             </trans-unit>
+
+        <trans-unit id="non autoriser" resname="non autoriser">
+                                    <source>non autoriser</source>
+                                    <target>Access Deny</target>
+                                </trans-unit>
     </body>
   </file>
 </xliff>

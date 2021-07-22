@@ -99,7 +99,7 @@ class User implements UserInterface
     public function getRoles()
     {
         $roles = $this->roles;
-        $roles[1] = "ROLE_USER";
+        $roles[] = "ROLE_USER";
         return $roles;
 
         // TODO: Implement getRoles() method.

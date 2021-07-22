@@ -9,6 +9,15 @@
                 <source>français</source>
                 <target>français🇫🇷</target>
             </trans-unit>
+            <trans-unit id="autoriser" resname="autoriser">
+                            <source>autoriser</source>
+                            <target>autoriser</target>
+                        </trans-unit>
+
+            <trans-unit id="non autoriser" resname="non autoriser">
+                            <source>non autoriser</source>
+                            <target>non autoriser</target>
+                        </trans-unit>
         </body>
     </file>
 </xliff>
