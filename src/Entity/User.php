@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  */
 class User implements UserInterface
-{
+    {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -40,6 +40,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $roles = [];
 
     public function getId(): ?int
     {
@@ -93,7 +98,10 @@ class User implements UserInterface
     }
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        $roles = $this->roles;
+        $roles[1] = "ROLE_USER";
+        return $roles;
+
         // TODO: Implement getRoles() method.
     }
     public function getUserIdentifier(): string
@@ -104,5 +112,12 @@ class User implements UserInterface
     public function __call($name, $arguments)
     {
         // TODO: Implement @method string getUserIdentifier()
+    }
+
+    public function setRoles(?array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 }
