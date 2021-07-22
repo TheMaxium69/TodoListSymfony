@@ -37,11 +37,11 @@
                     {% endif %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Lang : {{ 'français' | trans }}
+                            Lang : {{ 'français' | trans | capitalize }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({ _locale: 'fr' }))}}">Français</a></li>
-                            <li><a class="dropdown-item" href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({ _locale: 'en' }))}}">Englais</a></li>
+                            <li><a class="dropdown-item" href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({ _locale: 'en' }))}}">English</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

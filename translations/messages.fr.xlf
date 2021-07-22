@@ -7,7 +7,7 @@
         <body>
             <trans-unit id="français" resname="français">
                 <source>français</source>
-                <target>français</target>
+                <target>français🇫🇷</target>
             </trans-unit>
         </body>
     </file>

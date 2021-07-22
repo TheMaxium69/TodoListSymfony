@@ -12,7 +12,7 @@
                 <h5 class="card-title">{{ user.username }}</h5>
                 <p class="card-text">{{ user.email }}</p>
                 <a href="{{ path('adminShow', {id : user.id }) }}" class="btn btn-success">Afficher</a>
-                <a href="#" class="btn btn-danger">Supprimer</a>
+                <a href="{{ path('adminDelUser', {id : user.id }) }}" class="btn btn-danger">Supprimer</a>
             </div>
         </div>
     {% endfor %}

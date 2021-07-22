@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ user.username }}</h5>
                     <p class="card-text">{{ user.email }}</p>
-                    <a href="#" class="btn btn-danger">Supprimeer</a>
+                    <a href="{{ path('adminDelUser', {id : user.id }) }}" class="btn btn-danger">Supprimer</a>
                 </div>
             </div>
     </div>
@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ todo.description }}</h5>
                     <p class="card-text">Créer par <u>{{ todo.user.username }}</u></p>
-                    <a href="#" class="btn btn-danger">Supprimeer</a>
+                    <a href="{{ path('adminDelTodo', {id : todo.id }) }}" class="btn btn-danger">Supprimer</a>
                 </div>
             </div>
 
