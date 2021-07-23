@@ -1,14 +1,13 @@
-    {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Hello TodoController!{% endblock %}
 
 {% block body %}
 
-
-                <a href="{{ path("todo/",{sort:'createdAt',order:'ASC'}) }}" class="btn btn-dark"><small>{{ 'plusrecent'  | capitalize }}</small></a>
-                <a href="{{ path("todo/",{sort:'createdAt',order:'DESC'}) }}" class="btn btn-dark"><small>{{ 'moinsrecent'  | capitalize }}</small></a>
-                <a href="{{ path("todo/",{sort:'dueDate',order:'ASC'}) }}" class="btn btn-dark"><small>{{ 'plusurgent'  | capitalize }}</small></a>
-                <a href="{{ path("todo/",{sort:'dueDate',order:'DESC'}) }}" class="btn btn-dark"><small>{{ 'moinsurgent' | capitalize }}</small></a>
+    <a href="{{ path("todo/",{sort:'createdAt',order:'ASC'}) }}" class="btn btn-dark"><small>{{ 'plusrecent'  | capitalize }}</small></a>
+    <a href="{{ path("todo/",{sort:'createdAt',order:'DESC'}) }}" class="btn btn-dark"><small>{{ 'moinsrecent'  | capitalize }}</small></a>
+    <a href="{{ path("todo/",{sort:'dueDate',order:'ASC'}) }}" class="btn btn-dark"><small>{{ 'plusurgent'  | capitalize }}</small></a>
+    <a href="{{ path("todo/",{sort:'dueDate',order:'DESC'}) }}" class="btn btn-dark"><small>{{ 'moinsurgent' | capitalize }}</small></a>
 
     <div class="count">
        <small> Nombre de todos afficher : {{ todos.getTotalItemCount }}</small>
@@ -33,7 +32,7 @@
                     </div>
                 </div>
 
-                <a href="{{ path('check', {id : todo.id }) }}" class="btn {% if todo.checked %}btn-danger">
+                <a href="{{ path('check', {id : todo.id }) }}" class="check btn {% if todo.checked %}btn-danger">
                     Not Check
                     {% else %}btn-success">
                     Check
@@ -47,11 +46,22 @@
     </div>
 
 {% endblock %}
-    {% block javascripts %}
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-        <script>
-            console.log("test");
-        </script>
+    <script>
+        function checkClick(event){
+            event.preventDefault();
+            alert('TU ESSAYE DE CLIC ?');
+        };
 
+        document.addEventListener('DOMContentLoaded', () => {
+            const CheckBtn = document.querySelectorAll('.check');
+            CheckBtn.forEach((bouton)=>{
+                bouton.addEventListener('click',checkClick)
+            });
+        });
+    </script>
 
-    {% endblock %}
+{% endblock %}
