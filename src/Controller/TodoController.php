@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Check;
+use App\Entity\Todo;
 use App\Repository\TodoRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +19,7 @@ class TodoController extends AbstractController
 {
     /**
      * @Route("/todo", name="todo")
-     * @Route("/todo/{sort}/{order}", name="todo/")
+     * @Route("/todo/order/{sort}/{order}", name="todo/")
      */
     public function index(UserInterface $user,TodoRepository $todoRepo,$sort = null, $order = null, PaginatorInterface $paginator, Request $request): Response
     {
@@ -49,5 +51,34 @@ class TodoController extends AbstractController
         return $this->render('todo/index.html.twig', [
             'todos' => $todos,
         ]);
+    }
+
+    /**
+     * @Route("/todo/check/{id}", name="check")
+     */
+    public function check(Todo $todo): Response
+    {
+        dd($todo);
+
+
+        $check = new Check();
+
+        $check->setTodo($todo);
+
+    }
+
+    /**
+     * @Route("/todo/json/", name="json")
+     */
+    public function msgJson(): Response
+    {
+
+        $tab = [
+            "title" => "Je suis un titre",
+            "description" => "Je suis une description"
+        ];
+
+        return $this->json($tab, 200);
+
     }
 }

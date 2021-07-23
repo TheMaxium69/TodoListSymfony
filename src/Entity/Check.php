@@ -19,13 +19,13 @@ class Check
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=todo::class, inversedBy="checked", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Todo::class, inversedBy="checked", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $todo;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="checks")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="checks")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -35,28 +35,29 @@ class Check
         return $this->id;
     }
 
-    public function getTodo(): ?todo
+    public function getTodo(): ?Todo
     {
         return $this->todo;
     }
 
-    public function setTodo(todo $todo): self
+    public function setTodo(Todo $todo): self
     {
         $this->todo = $todo;
 
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?user $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
+
 
 }

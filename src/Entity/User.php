@@ -47,7 +47,7 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\OneToMany(targetEntity=Check::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Check::class, mappedBy="user", orphanRemoval=true)
      */
     private $checks;
 
