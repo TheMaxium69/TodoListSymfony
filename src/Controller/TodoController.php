@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Check;
 use App\Entity\Todo;
 use App\Repository\TodoRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,16 +57,28 @@ class TodoController extends AbstractController
     /**
      * @Route("/todo/check/{id}", name="check")
      */
-    public function check(Todo $todo): Response
+    public function check(Todo $todo, EntityManagerInterface $manager): Response
     {
-        dd($todo);
+
+        if(!$todo->getChecked()){
+
+            $check = new Check();
+            $check->setTodo($todo);
+            $check->setUser($todo->getUser());
+
+            $manager->persist($check);
+        }else {
+            $manager->remove($todo->getChecked());
+        }
 
 
-        $check = new Check();
 
-        $check->setTodo($todo);
+        $manager->flush();
+        return $this->json(["C'EST GOOD"]);
 
     }
+
+
 
     /**
      * @Route("/todo/json/", name="json")

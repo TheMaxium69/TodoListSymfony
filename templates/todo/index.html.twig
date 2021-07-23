@@ -32,6 +32,12 @@
                     <div class="row h-100 justify-content-center align-items-center px-2"><p>DueDate : {{ todo.dueDate | date('d M Y') }}</p>
                     </div>
                 </div>
+
+                <a href="{{ path('check', {id : todo.id }) }}" class="btn {% if todo.checked %}btn-danger">
+                    Not Check
+                    {% else %}btn-success">
+                    Check
+                {% endif %}</a>
             </div>
 
         {% endfor %}
@@ -39,4 +45,15 @@
     <div class="navigation">
         {{ knp_pagination_render(todos, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
     </div>
+
 {% endblock %}
+
+    {% block javascripts %}
+
+
+        <script>
+
+        </script>
+
+
+    {% endblock %}
