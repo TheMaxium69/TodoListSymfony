@@ -38,6 +38,11 @@ class Todo
      */
     private $user;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Check::class, mappedBy="todo", cascade={"persist", "remove"})
+     */
+    private $checked;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,23 @@ class Todo
     public function setUser(?user $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getChecked(): ?Check
+    {
+        return $this->checked;
+    }
+
+    public function setChecked(Check $checked): self
+    {
+        // set the owning side of the relation if necessary
+        if ($checked->getTodo() !== $this) {
+            $checked->setTodo($this);
+        }
+
+        $this->checked = $checked;
 
         return $this;
     }

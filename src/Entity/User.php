@@ -46,6 +46,16 @@ class User implements UserInterface
      */
     private $roles = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity=Check::class, mappedBy="user")
+     */
+    private $checks;
+
+    public function __construct()
+    {
+        $this->checks = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -117,6 +127,36 @@ class User implements UserInterface
     public function setRoles(?array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Check[]
+     */
+    public function getChecks(): Collection
+    {
+        return $this->checks;
+    }
+
+    public function addCheck(Check $check): self
+    {
+        if (!$this->checks->contains($check)) {
+            $this->checks[] = $check;
+            $check->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCheck(Check $check): self
+    {
+        if ($this->checks->removeElement($check)) {
+            // set the owning side to null (unless already changed)
+            if ($check->getUser() === $this) {
+                $check->setUser(null);
+            }
+        }
 
         return $this;
     }
