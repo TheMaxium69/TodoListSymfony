@@ -10,7 +10,8 @@
     <a href="{{ path("todo/",{sort:'dueDate',order:'DESC'}) }}" class="btn btn-dark"><small>{{ 'moinsurgent' | capitalize }}</small></a>
 
     <div class="count">
-       <small> Nombre de todos afficher : {{ todos.getTotalItemCount }}</small>
+       <small> Nombre de todos afficher : {{ todos.getTotalItemCount }}</small><br>
+       <small>total de check : <p id="nbCheck">{{ app.user.getChecks | length }}</p> </small>
     </div>
 
         {% for todo in todos %}
@@ -32,11 +33,20 @@
                     </div>
                 </div>
 
-                <a href="{{ path('check', {id : todo.id }) }}" class="check btn {% if todo.checked %}btn-danger">
-                    Not Check
-                    {% else %}btn-success">
-                    Check
-                {% endif %}</a>
+                {% if todo.checked %}
+                    {% set colorCheck = "btn-danger" %}
+                    {% set messageCheck = "FAIT !" %}
+                {% else %}
+                    {% set colorCheck = "btn-success" %}
+                    {% set messageCheck = "A Faire" %}
+                {% endif %}
+                <a class="btn {{ colorCheck }} check" href="{{ path("check",{id:todo.id}) }}">
+                    <strong>
+                      <span class="checked" data-check="">
+                          {{ messageCheck }}
+                      </span>
+                    </strong>
+                </a>
             </div>
 
         {% endfor %}
@@ -51,18 +61,41 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
 
-{#    <script>#}
-{#        function checkClick(event){#}
-{#            event.preventDefault();#}
-{#            console.log('TU ESSAYE DE CLIC ?');#}
-{#        };#}
+    <script>
+        function cliquePourChecker(evenement){
+            evenement.preventDefault();
 
-{#        document.addEventListener('DOMContentLoaded', () => {#}
-{#            const CheckBtn = document.querySelectorAll('.check');#}
-{#            CheckBtn.forEach((bouton)=>{#}
-{#                bouton.addEventListener('click',checkClick)#}
-{#            });#}
-{#        });#}
-{#    </script>#}
+            let url = this.href;
+            let requeteAjax = new XMLHttpRequest();
+            requeteAjax.open('GET',url);
+
+            requeteAjax.onload = ()=> {
+                let data = JSON.parse(requeteAjax.responseText);
+                let textSpan = "";
+                if(data.message == 'checked'){
+                    texteSpan = "FAIT !";
+
+                }else if(data.message == 'unchecked'){
+                    texteSpan = "A Faire";
+                }
+                this.querySelector('.checked').innerHTML = texteSpan;
+                nbCheck = data.TotoCheck;
+                nbCheck = nbCheck.toString();
+                console.log(data.message);
+                console.log(nbCheck);
+                const textCheck = document.querySelector('#nbCheck');
+                textCheck.innerHTML = nbCheck;
+            }
+            requeteAjax.send();
+
+        };
+        document.addEventListener('DOMContentLoaded', ()=> {
+            const tousMesBoutons = document.querySelectorAll('.check');
+            tousMesBoutons.forEach((bouton)=>{
+                bouton.addEventListener('click',cliquePourChecker)
+            });
+        });
+
+    </script>
 
 {% endblock %}

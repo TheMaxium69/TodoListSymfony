@@ -50,16 +50,17 @@ class TodoController extends AbstractController
 
 
         return $this->render('todo/index.html.twig', [
-            'todos' => $todos,
+            'todos' => $todos
         ]);
     }
 
     /**
      * @Route("/todo/check/{id}", name="check")
      */
-    public function check(Todo $todo, EntityManagerInterface $manager): Response
+    public function check(Todo $todo, EntityManagerInterface $manager, UserInterface $user): Response
     {
 
+        $totoCheck = count($user->getChecks());
         if(!$todo->getChecked()){
 
             $check = new Check();
@@ -68,15 +69,17 @@ class TodoController extends AbstractController
 
             $manager->persist($check);
             $result = "checked";
+            $totoCheck = $totoCheck +1;
         }else {
             $manager->remove($todo->getChecked());
             $result = "unchecked";
+            $totoCheck = $totoCheck -1;
         }
 
 
-
         $manager->flush();
-        $data = ['message' => "$result"];
+        $data = ['message' => "$result",
+                 'TotoCheck' => "$totoCheck"];
         return $this->json($data, 200);
 
     }
