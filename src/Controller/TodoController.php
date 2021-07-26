@@ -67,14 +67,17 @@ class TodoController extends AbstractController
             $check->setUser($todo->getUser());
 
             $manager->persist($check);
+            $result = "checked";
         }else {
             $manager->remove($todo->getChecked());
+            $result = "unchecked";
         }
 
 
 
         $manager->flush();
-        return $this->json(["C'EST GOOD"]);
+        $data = ['message' => "$result"];
+        return $this->json($data, 200);
 
     }
 
